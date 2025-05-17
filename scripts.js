@@ -3,16 +3,32 @@ const gameBoard = (function createBoard () {
     const columns = 3;
     const board = [];
 
-    for (let i = 0; i < rows; i++) {
-        board[i] = [];
-        for (let j = 0; j < columns; j++) {
-            board[i].push('0'); // '0' as placeholder
+    const initBoard = () => {
+        for (let i = 0; i < rows; i++) {
+            board[i] = [];
+            for (let j = 0; j < columns; j++) {
+                board[i].push(Cell());
+            }
         }
-    }
+    };
 
-    function logBoard() {
+    const getBoard = () => board;
+
+    const printBoard = () => {
         console.table(board);
     }
 
-    return { board };
+    return { initBoard, getBoard, printBoard };
 })();
+
+function Cell() {
+    let value = '';
+
+    const addSymbol = (player) => {
+        value = player;
+    };
+
+    const getValue = () => value;
+
+    return { addSymbol, getValue };
+}

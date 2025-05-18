@@ -16,9 +16,24 @@ const gameBoard = (function createBoard () {
 
     const printBoard = () => {
         console.table(board);
-    }
+    };
 
-    return { initBoard, getBoard, printBoard };
+    const writeSymbol = (row, column, player) => {
+        // Checks if cell is empty
+        const queryCell = () => {
+            if (board[row][column] === '') {
+                return false;
+            } else {
+                return true;
+            };
+        }
+
+        if(!queryCell) return;
+
+        board[row][column].addSymbol(player);
+    };
+
+    return { initBoard, getBoard, printBoard, writeSymbol };
 })();
 
 function Cell() {

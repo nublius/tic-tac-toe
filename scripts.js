@@ -130,6 +130,9 @@ const GameController = (function Controller (playerOneName = "Player One", playe
         console.log("Checking win for", symbol);
         console.log("Row check:", board[row].map(cell => cell.getValue()));
         console.log("Column check:", columnArray.map(cell => cell.getValue()));
+        console.log("Diag check:", diagArray.map(cell => cell.getValue()));
+        console.log("AntiDiag check:", antiDiagArray.map(cell => cell.getValue()));
+
     }
 
     const restartGame = () => {

@@ -6,11 +6,24 @@
 
 body {
     background-color: #000814;
+    color: #FFC300;
 }
 
-.grid__container {
+#main__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.header__container>h1 {
+    font-size: 2.5rem;
+}
+
+#grid__container {
     display: grid;
-    border: 2px solid #001D3D;
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
     width: 300px;

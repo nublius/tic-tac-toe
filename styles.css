@@ -4,9 +4,16 @@
     box-sizing: border-box;
 }
 
+.exile-regular {
+  font-family: "Exile", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
 body {
     background-color: #000814;
     color: #FFC300;
+    font-family: "Roboto", sans-serif;
 }
 
 #main__container {
@@ -33,6 +40,6 @@ body {
 .cell {
     width: 100px;
     height: 100px;
-    border: 2px solid #001D3D;
+    border: 2px solid #000814;
     background-color: #003566;
 }

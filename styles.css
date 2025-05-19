@@ -7,3 +7,19 @@
 body {
     background-color: #000814;
 }
+
+.grid__container {
+    display: grid;
+    border: 2px solid #001D3D;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 300px;
+    height: 300px;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #001D3D;
+    background-color: #003566;
+}

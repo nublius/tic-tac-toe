@@ -46,6 +46,9 @@ body {
     background-color: #003566;
     cursor: pointer;
     outline: none;
+    color: #FFC300;
+    font-size: 2.5rem;
+    font-weight: 600;
 }
 
 .cell:hover {

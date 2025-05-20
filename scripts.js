@@ -45,6 +45,7 @@ const GameController = (function Controller (playerOneName = "Player One", playe
     GameBoard.initBoard();
 
     let gameOver = false;
+    let winner = null;
 
     const players = [
         {
@@ -124,7 +125,8 @@ const GameController = (function Controller (playerOneName = "Player One", playe
             console.log(`${getActivePlayer().name} wins!`);
             GameBoard.printBoard();
             gameOver = true;
-            return getActivePlayer().name;
+            winner = getActivePlayer().name;
+            return true;
         }
 
         console.log("Checking win for", symbol);
@@ -142,11 +144,16 @@ const GameController = (function Controller (playerOneName = "Player One", playe
         printNewRound();
     }
 
+    const getWinner = () => winner;
+    const getGameOver = () => gameOver;
+
     return {
         playRound,
         getActivePlayer,
         restartGame,
-        getBoard: GameBoard.getBoard
+        getBoard: GameBoard.getBoard,
+        getGameOver,
+        getWinner
     };
 })();
 
@@ -165,6 +172,13 @@ const DisplayController = (function Controller() {
     }
 
     const elements = initDisplay();
+
+    const reloadClick = document.querySelector(".reload");
+
+    reloadClick.addEventListener("click", () => {
+        GameController.restartGame();
+        updateDisplay();
+    })
 
     const handleCellClick = (row, column) => {
        GameController.playRound(row, column);
@@ -193,6 +207,10 @@ const DisplayController = (function Controller() {
                 elements.gridContainer.appendChild(cellButton);
             })
         })
+
+        if (GameController.getGameOver()) {
+            elements.gameStateDisplay.textContent = `${GameController.getWinner().toUpperCase()} WINS!`;
+        }
     }
 
     updateDisplay();

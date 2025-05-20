@@ -145,9 +145,56 @@ const GameController = (function Controller (playerOneName = "Player One", playe
     return {
         playRound,
         getActivePlayer,
-        restartGame
+        restartGame,
+        getBoard: GameBoard.getBoard
     };
 })();
 
 // 
 
+const DisplayController = (function Controller() {
+
+    const initDisplay = () => {
+        const gridContainer = document.querySelector("#grid__container");
+        const gameStateDisplay = document.querySelector("h2");
+
+        return {
+            gridContainer,
+            gameStateDisplay
+        };
+    }
+
+    const elements = initDisplay();
+
+    const handleCellClick = (row, column) => {
+       GameController.playRound(row, column);
+       updateDisplay();
+    }
+
+    const updateDisplay = () => {
+        elements.gridContainer.textContent = "";
+
+        const board = GameController.getBoard();
+        const activePlayer = GameController.getActivePlayer().name;
+
+        elements.gameStateDisplay.textContent = `${activePlayer.toUpperCase()}'S TURN`;
+
+        board.forEach((row, rowIndex) => {
+            row.forEach((cell, columnIndex) => {
+                const cellButton = document.createElement("button");
+                cellButton.classList.add("cell");
+
+                cellButton.dataset.row = rowIndex;
+                cellButton.dataset.column = columnIndex;
+
+                cellButton.addEventListener("click", () => handleCellClick(rowIndex, columnIndex));
+
+                cellButton.textContent = cell.getValue();
+                elements.gridContainer.appendChild(cellButton);
+            })
+        })
+    }
+
+    updateDisplay();
+
+})();

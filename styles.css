@@ -45,6 +45,7 @@ body {
     border: 2px solid #000814;
     background-color: #003566;
     cursor: pointer;
+    outline: none;
 }
 
 .cell:hover {
@@ -59,6 +60,7 @@ button.reload {
     background: none;
     border: none;
     cursor: pointer;
+    outline: none;
 }
 
 #reload {

@@ -14,6 +14,8 @@ body {
     background-color: #000814;
     color: #FFC300;
     font-family: "Roboto", sans-serif;
+    width: 100vw;
+    height: 100vh;
 }
 
 #main__container {
@@ -21,12 +23,12 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100vw;
     height: 100vh;
+    gap: 5px;
 }
 
 .header__container>h1 {
-    font-size: 2.5rem;
+    font-size: 2.52rem;
 }
 
 #grid__container {
@@ -42,4 +44,32 @@ body {
     height: 100px;
     border: 2px solid #000814;
     background-color: #003566;
+    cursor: pointer;
+}
+
+.cell:hover {
+    border: 1px solid #003566;
+}
+
+.symbol {
+    fill: #FFC300;
+}
+
+button.reload {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+#reload {
+    fill: #FFC300;
+    height: 2rem;
+    width: 2rem;
+}
+
+.gamestate__container {
+    display: flex;
+    gap: 10px;
+    width: 300px;
+    justify-content: space-between;
 }

@@ -120,12 +120,21 @@ const GameController = (function Controller (playerOneName = "Player One", playe
         const columnWin = columnArray.every(cell => cell.getValue() === symbol);
         const diagWin = diagArray.every(cell => cell.getValue() === symbol);
         const antiDiagWin = antiDiagArray.every(cell => cell.getValue() === symbol);
+        const isBoardFull = board.every(row =>
+            row.every(cell => cell.getValue() !== '')
+        );
 
         if (rowWin || columnWin || diagWin || antiDiagWin) {
             console.log(`${getActivePlayer().name} wins!`);
             GameBoard.printBoard();
             gameOver = true;
             winner = getActivePlayer().name;
+            return true;
+        } else if (isBoardFull) {
+            gameOver = true;
+            winner = "TIE!";
+            GameBoard.printBoard();
+            console.log("TIE!");
             return true;
         }
 
@@ -208,8 +217,10 @@ const DisplayController = (function Controller() {
             })
         })
 
-        if (GameController.getGameOver()) {
+        if (GameController.getGameOver() && GameController.getWinner() != "TIE!") {
             elements.gameStateDisplay.textContent = `${GameController.getWinner().toUpperCase()} WINS!`;
+        } else if (GameController.getGameOver()) {
+            elements.gameStateDisplay.textContent = "TIE!";
         }
     }
 

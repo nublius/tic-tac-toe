@@ -72,6 +72,10 @@ button.reload {
     width: 2rem;
 }
 
+.highlighted {
+    fill: #FFD60A;
+}
+
 .gamestate__container {
     display: flex;
     gap: 10px;

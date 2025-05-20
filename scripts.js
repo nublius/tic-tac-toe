@@ -46,6 +46,7 @@ const GameController = (function Controller (playerOneName = "Player One", playe
 
     let gameOver = false;
     let winner = null;
+    let winType = null;
 
     const players = [
         {
@@ -124,7 +125,12 @@ const GameController = (function Controller (playerOneName = "Player One", playe
             row.every(cell => cell.getValue() !== '')
         );
 
-        if (rowWin || columnWin || diagWin || antiDiagWin) {
+        if (rowWin) winType = "row";
+        else if (columnWin) winType = "column";
+        else if (diagWin) winType = "diagonal";
+        else if (antiDiagWin) winType = "antidiagonal";
+
+        if (winType) {
             console.log(`${getActivePlayer().name} wins!`);
             GameBoard.printBoard();
             gameOver = true;
@@ -151,10 +157,12 @@ const GameController = (function Controller (playerOneName = "Player One", playe
         gameOver = false;
         activePlayer = players[0];
         printNewRound();
+        winType = null;
     }
 
     const getWinner = () => winner;
     const getGameOver = () => gameOver;
+    const getWinType = () => winType;
 
     return {
         playRound,
@@ -162,7 +170,8 @@ const GameController = (function Controller (playerOneName = "Player One", playe
         restartGame,
         getBoard: GameBoard.getBoard,
         getGameOver,
-        getWinner
+        getWinner,
+        getWinType
     };
 })();
 
@@ -219,6 +228,7 @@ const DisplayController = (function Controller() {
 
         if (GameController.getGameOver() && GameController.getWinner() != "TIE!") {
             elements.gameStateDisplay.textContent = `${GameController.getWinner().toUpperCase()} WINS!`;
+
         } else if (GameController.getGameOver()) {
             elements.gameStateDisplay.textContent = "TIE!";
         }

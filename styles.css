@@ -72,8 +72,8 @@ button.reload {
     width: 2rem;
 }
 
-button.highlight {
-    color: white;
+.highlight {
+    color: whitesmoke;
 }
 
 .gamestate__container {

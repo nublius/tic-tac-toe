@@ -255,6 +255,7 @@ const DisplayController = (function Controller() {
         })
 
         if (GameController.getGameOver() && GameController.getWinner() != "TIE!") {
+            elements.gameStateDisplay.classList.add("highlight");
             elements.gameStateDisplay.textContent = `${GameController.getWinner().toUpperCase()} WINS!`;
 
         } else if (GameController.getGameOver()) {

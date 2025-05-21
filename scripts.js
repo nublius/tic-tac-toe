@@ -47,6 +47,7 @@ const GameController = (function Controller (playerOneName = "Player One", playe
     let gameOver = false;
     let winner = null;
     let winType = null;
+    let winPos = null;
 
     const players = [
         {
@@ -99,6 +100,12 @@ const GameController = (function Controller (playerOneName = "Player One", playe
     const checkWin = (row, column, symbol) => {
         const board = GameBoard.getBoard();
 
+        const rowArray = [
+            board[row][0],
+            board[row][1],
+            board[row][2]
+        ]
+
         const columnArray = [
             board[0][column], 
             board[1][column], 
@@ -125,10 +132,22 @@ const GameController = (function Controller (playerOneName = "Player One", playe
             row.every(cell => cell.getValue() !== '')
         );
 
-        if (rowWin) winType = "row";
-        else if (columnWin) winType = "column";
-        else if (diagWin) winType = "diagonal";
-        else if (antiDiagWin) winType = "antidiagonal";
+        if (rowWin) {
+            winType ="row";
+            winPos = rowArray;
+        }
+        else if (columnWin) {
+            winType = "column";
+            winPos = columnArray;
+        }
+        else if (diagWin) {
+            winType = "diagonal";
+            winPos = diagArray;
+        }
+        else if (antiDiagWin) {
+            winType = "antidiagonal";
+            winPos = antiDiagArray;
+        }
 
         if (winType) {
             console.log(`${getActivePlayer().name} wins!`);
@@ -163,6 +182,7 @@ const GameController = (function Controller (playerOneName = "Player One", playe
     const getWinner = () => winner;
     const getGameOver = () => gameOver;
     const getWinType = () => winType;
+    const getWinPos = () => winPos;
 
     return {
         playRound,
@@ -171,7 +191,8 @@ const GameController = (function Controller (playerOneName = "Player One", playe
         getBoard: GameBoard.getBoard,
         getGameOver,
         getWinner,
-        getWinType
+        getWinType,
+        getWinPos
     };
 })();
 
@@ -222,6 +243,13 @@ const DisplayController = (function Controller() {
                 cellButton.addEventListener("click", () => handleCellClick(rowIndex, columnIndex));
 
                 cellButton.textContent = cell.getValue();
+
+                let isWinningCell = (GameController.getWinPos() || []).includes(cell);
+
+                if (isWinningCell) {
+                    cellButton.classList.add("highlight");
+                }
+
                 elements.gridContainer.appendChild(cellButton);
             })
         })
